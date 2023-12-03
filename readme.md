@@ -1,5 +1,7 @@
 # Three.js exercise from Three.js journey
 
+## Demo
+Demo available [here](https://galaxy-generator-blond-nu.vercel.app/) :)
 ## Setup
 Download [Node.js](https://nodejs.org/en/download/).
 Run this followed commands:
