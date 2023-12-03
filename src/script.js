@@ -22,7 +22,7 @@ const parameters = {
   size: 0.01,
   radius: 5,
   branches: 3,
-  rotationActive: false,
+  rotationActive: true,
   rotationSpeed: 0.001,
   rotationClockwise: true,
   spin: 1,
