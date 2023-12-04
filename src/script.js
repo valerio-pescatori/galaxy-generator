@@ -1,12 +1,14 @@
 import * as THREE from "three";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls.js";
 import GUI from "lil-gui";
+import star from "../static/kenney_particle-pack/star_04.png";
 
 /**
  * Base
  */
 // Debug
 const gui = new GUI();
+gui.close();
 
 // Canvas
 const canvas = document.querySelector("canvas.webgl");
@@ -14,12 +16,16 @@ const canvas = document.querySelector("canvas.webgl");
 // Scene
 const scene = new THREE.Scene();
 
+// Loader
+const textureLoader = new THREE.TextureLoader();
+const starTexture = textureLoader.load(star);
+
 /**
  * Geometries
  */
 const parameters = {
-  count: 100000,
-  size: 0.01,
+  count: 300000,
+  size: 0.15,
   radius: 5,
   branches: 3,
   rotationActive: true,
@@ -31,8 +37,6 @@ const parameters = {
   insideColor: "#ff6030",
   outsideColor: "#1b3984",
 };
-
-const normalize = (val, max, min) => (val - min) / (max - min);
 
 let points;
 let pointsGeometry;
@@ -99,7 +103,9 @@ const generateGalaxy = () => {
     size: parameters.size,
     sizeAttenuation: true,
     depthWrite: false,
+    transparent: true,
     blending: THREE.AdditiveBlending,
+    map: starTexture,
     vertexColors: true,
   });
 
@@ -108,7 +114,7 @@ const generateGalaxy = () => {
 };
 
 gui.add(parameters, "count", 100000, 1000000, 10000).onFinishChange(generateGalaxy);
-gui.add(parameters, "size", 0.001, 0.1, 0.001).onFinishChange(generateGalaxy);
+gui.add(parameters, "size", 0.001, 0.2, 0.001).onFinishChange(generateGalaxy);
 gui.add(parameters, "radius", 5, 20, 0.1).onFinishChange(generateGalaxy);
 gui.add(parameters, "branches", 3, 20, 1).onFinishChange(generateGalaxy);
 gui.add(parameters, "spin", -2, 2, 0.001).onFinishChange(generateGalaxy);
